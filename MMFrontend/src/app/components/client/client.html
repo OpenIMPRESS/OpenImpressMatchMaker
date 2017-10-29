@@ -1,0 +1,78 @@
+<table class="full-width" cellspacing="1"><tr>
+    <td style="width:140px"><div>
+        <h4  *ngIf="!editing" (dblclick)="edit();" class="client-name">{{model.name}}</h4>
+        <input *ngIf="editing" name="name" (keyup)="submit($event)" [(ngModel)]="model.name" placeholder="Client Name" class="edit-client-name form-control">
+        <h5  *ngIf="!editing" (dblclick)="edit();" class="client-type">{{model.type}}</h5>
+        <input *ngIf="editing" name="type" (keyup)="submit($event)" [(ngModel)]="model.type" placeholder="Client Type" class="edit-client-type form-control">
+        <div class="client-guid">{{model.guid | formatGUID }}</div>
+    </div></td>
+    <td><div class="client-details">
+        <ul>
+            <li *ngFor="let socket of model.sockets">
+                <div socketview class="h" [client]="client" [model]="socket"></div>
+            </li>
+        </ul>
+    </div></td>
+    <td><div>
+        <!--
+        <button md-icon-button *ngIf="!editing" (click)="remove()"><md-icon class="delete-icon">delete</md-icon></button>
+        <button md-icon-button *ngIf="!editing" (click)="edit()"><md-icon class="edit-icon">edit</md-icon></button>
+        <button md-icon-button *ngIf="editing"  (click)="cancelEdit()"><md-icon class="cancel-icon">cancel</md-icon></button>
+        <button md-icon-button *ngIf="editing"  (click)="saveEdit()"><md-icon class="save-icon">save</md-icon></button>
+        -->
+
+        
+        <div *ngIf="session.isUnassigned" class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                Assign to Session
+            </a>
+            
+            <div class="dropdown-menu">
+                <a *ngFor="let session of sessions" (click)="assign(session)" class="dropdown-item" >
+                    {{session.name}}
+                </a>
+            </div>
+        </div>
+
+        <div *ngIf="!session.isUnassigned" class="">
+            <a class="btn btn-secondary" href="#" role="button" (click)="unassign()">
+                Unassign
+            </a>
+        </div>
+
+    </div></td>
+    <div class="clearleft"></div>
+</tr></table>
+    
+<!--
+<td></td>
+<td>
+    <span  *ngIf="!editing" (dblclick)="edit();" class="client-name">{{model.name}}</span>
+    <input *ngIf="editing" name="name" (keyup)="submit($event)" [(ngModel)]="model.name" placeholder="Client Name" class="edit-client-name form-control">
+</td><td>
+    <span  *ngIf="!editing" (dblclick)="edit();" class="client-type">{{model.type}}</span>
+    <input *ngIf="editing" name="type" (keyup)="submit($event)" [(ngModel)]="model.type" placeholder="..." class="edit-client-type form-control">
+</td><td>
+    <span>{{model.guid}}</span>
+</td><td>
+    <span>...</span>
+</td>
+
+<td></td>
+<td colspan="4">
+    <table width="100%" class="socket-table">
+        <thead class="h">
+            <th class="h indent"></th>
+            <th class="h">Identifier</th>
+            <th class="h">Data Type</th>
+            <th class="h">Connection</th>
+            <th class="h text-center">Options</th>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let socket of client.sockets">
+                <tr socketview class="h" [client]="client" [model]="socket"></tr>
+            </ng-container>
+        </tbody>
+    </table>
+</td>
+-->

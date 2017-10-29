@@ -1,0 +1,96 @@
+<div class="sessionlist-wrap">
+    <div id="accordion" role="tablist">
+        <ng-container *ngFor="let sessionModel of sessions | sessionName:'!DEFAULT'">
+            <div class="card" sessionview [mainComponent]="this" [model]="sessionModel" [sessions]="sessions"></div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="sessionlist-wrap">
+    <div class="card form-card">
+        <table width="100%"><tr>
+            <td><input name="name" id="newName" [(ngModel)]="newSession.name" placeholder="Session Name" class="form-control"></td>
+            <td><input name="type" id="newDescription" [(ngModel)]="newSession.description" placeholder="Description" class="form-control"></td>
+            <td class="text-right"><button type="submit" class="btn btn-primary" (click)="createSession()">NEW SESSION</button></td>
+        </tr></table>
+    </div>
+</div>
+
+
+<div class="sessionlist-wrap">
+    <div id="default" role="tablist">
+        <div class="card" sessionview [mainComponent]="this" [model]="noSession" [sessions]="sessions"></div>
+    </div>
+</div>
+
+<div class="sessionlist-wrap">
+    <div class="card form-card">
+        <table width="100%"><tr>
+            <td><input name="name" [(ngModel)]="newClient.name" placeholder="Name" class="new-client-name form-control"></td>
+            <td><input name="type" [(ngModel)]="newClient.type" placeholder="Type" class="new-client-type form-control"></td>
+            <td><input name="type" [(ngModel)]="newClient.guid" placeholder="GUID" class="new-client-guid form-control"></td>
+            <td class="text-right"><button type="submit" class="btn btn-primary" (click)="createClient()">NEW CLIENT</button></td>
+        </tr></table>
+    </div>
+</div>
+<!--
+<table class="session-table">
+
+    <thead class="h">
+        <th class="h indent"></th>
+        <th class="h">Session</th>
+        <th class="h">Description</th>
+        <th class="h text-center">Options</th>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let sessionModel of sessions">
+            <tr sessionview [model]="sessionModel">
+                <td></td>
+                <td colspan="3">
+                    <table width="100%" class="client-table">
+                        <thead class="h">
+                            <th class="h indent"></th>
+                            <th class="h">Client</th>
+                            <th class="h">Type</th>
+                            <th class="h">GUID</th>
+                            <th class="h text-center">Options</th>
+                        </thead>
+                        <tbody>
+                            <ng-container  *ngFor="let clientModel of sessionModel.clients">
+                                <tr clientview class="h" [session]="sessionModel" [model]="clientModel">
+                                    <td></td>
+                                    <td colspan="4">
+                                        <table width="100%" class="socket-table">
+                                            <thead class="h">
+                                                <th class="h indent"></th>
+                                                <th class="h">Identifier</th>
+                                                <th class="h">Data Type</th>
+                                                <th class="h">Connection</th>
+                                                <th class="h text-center">Options</th>
+                                            </thead>
+                                            <tbody>
+                                                <ng-container *ngFor="let socketModel of clientModel.sockets">
+                                                    <tr socketview class="h" [client]="clientModel" [model]="socketModel"></tr>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<input type="text" name="name" id="newName" [(ngModel)]="newSession.name" placeholder="Session Name" class="form-control">
+<input type="text" name="type" id="newDescription" [(ngModel)]="newSession.description" placeholder="Description" class="form-control">
+<button type="submit" class="btn btn-primary" (click)="createSession()">NEW SESSION</button>
+
+<input name="name" [(ngModel)]="newClient.name" placeholder="Client Name" class="new-client-name form-control">
+<input name="type" [(ngModel)]="newClient.type" placeholder="Type" class="new-client-type form-control">
+<input name="type" [(ngModel)]="newClient.guid" placeholder="GUID" class="new-client-guid form-control">
+<button type="submit" class="btn btn-primary" (click)="createClient()">NEW CLIENT</button>
+    -->

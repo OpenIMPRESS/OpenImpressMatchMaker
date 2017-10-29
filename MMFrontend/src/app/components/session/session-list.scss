@@ -1,0 +1,25 @@
+table.session-table thead {
+    background-color: #eee;
+}
+
+table.client-table thead {
+    background-color: #aaa;
+    //width: 100%;
+}
+
+table.socket-table thead {
+    background-color: #999;
+    //width: 100%;
+}
+
+table th.indent {
+    width: 20px;
+}
+
+div.sessionlist-wrap {
+    padding:20px;
+}
+
+div.form-card {
+    padding: 10px;
+}

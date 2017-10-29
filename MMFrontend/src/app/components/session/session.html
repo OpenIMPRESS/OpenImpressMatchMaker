@@ -1,0 +1,24 @@
+<div [ngClass]="{'bg-dark': model.isUnassigned } " class="bg-primary text-light card-header" role="tab" id="heading{{model._id}}">
+    <h5 class="mb-0">
+        <a *ngIf="!editing">
+            <span (dblclick)="!model.isUnassigned && edit();">{{model.name}}</span>
+        </a>
+        <input *ngIf="editing" name="name" (keyup)="submit($event)" [(ngModel)]="model.name" placeholder="Session Name" class="edit-session-name form-control">
+    </h5>
+    <span  *ngIf="!editing" (dblclick)="!model.isUnassigned && edit();">{{model.description}}</span>
+    <input *ngIf="editing" name="description" (keyup)="submit($event)" [(ngModel)]="model.description" placeholder="..." class="edit-session-desc form-control">
+</div>
+
+<div id="collapse{{model._id}}" role="tabpanel" data-parent="#accordion">
+    <div class="card-body">
+        <ng-container  *ngFor="let client of model.clients">
+            <div clientview class="h" [mainComponent]="mainComponent" [session]="model" [sessions]="sessions" [model]="client"></div>
+            <hr>
+        </ng-container>
+    </div>
+</div>
+
+<!-- TODO: Cancel & Delete buttons...
+<button class="btn btn-primary" (click)="session.editing = !session.editing;"><i class="fa fa-pencil"></i></button>
+<button class="btn btn-danger" (click)="remove(session)"><i class="fa fa-trash"></i></button>
+-->
