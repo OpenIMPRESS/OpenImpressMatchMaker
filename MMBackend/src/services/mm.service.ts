@@ -98,11 +98,14 @@ export class MMService {
             return console.log("Not part of session...");
         }
 
+        var session;
+
         try {
-            let session = await MMAPIService.getSession(client.session);
+            session = await MMAPIService.getSession(client.session);
         } catch (e) {
             throw Error("Failed to get session: "+e);
         }
+
         var connectedEndpoints : IConnection[] = self.GetConnectedEndpoints(socket, session);
         for (var soIdx in connectedEndpoints) {
             self.SendAnswer(socket.connection, connectedEndpoints[soIdx]);
