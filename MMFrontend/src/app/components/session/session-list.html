@@ -1,10 +1,10 @@
+        <ng-container *ngFor="let sessionModel of sessions | sessionName:'!DEFAULT'">
 <div class="sessionlist-wrap">
     <div id="accordion" role="tablist">
-        <ng-container *ngFor="let sessionModel of sessions | sessionName:'!DEFAULT'">
             <div class="card" sessionview [mainComponent]="this" [model]="sessionModel" [sessions]="sessions"></div>
-        </ng-container>
     </div>
 </div>
+        </ng-container>
 
 <div class="sessionlist-wrap">
     <div class="card form-card">

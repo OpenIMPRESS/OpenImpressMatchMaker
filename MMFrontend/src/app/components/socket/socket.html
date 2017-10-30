@@ -1,17 +1,2 @@
-<!--
-<td>
-    <span  *ngIf="!editing" (dblclick)="edit();" class="socket-identifier">{{model.identifier}}</span>
-    <input *ngIf="editing" name="name" (keyup)="submit($event)" [(ngModel)]="model.name" placeholder="Socket Identifier" class="edit-socket-name form-control">
-</td><td>
-    <span  *ngIf="!editing" (dblclick)="edit();" class="socket-dataType">{{model.dataType}}</span>
-    <input *ngIf="editing" name="dataType" (keyup)="submit($event)" [(ngModel)]="model.type" placeholder="..." class="edit-socket-dataType form-control">
-</td>
-<td connectionview [socket]="model" [model]="model.connection"></td>
-<td>
-    <span>...</span>
-</td>-->
-
-<div>
-    <b>{{model.identifier}}@{{model.role}}</b> (Data: <em>{{model.dataType}}</em>)<br>
-    <span connectionview [socket]="model" [model]="model.connection"></span>
-</div>
+<em>{{model.identifier}}</em> {{model.dataType}} <br>
+<span connectionview [socket]="model" [model]="model.connection"></span>
