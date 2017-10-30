@@ -1,7 +1,0 @@
-{
-    "mongoUrl": "mongodb://127.0.0.1:27017/mm",
-    "user": "admin",
-    "pass": "pass",
-    "mmServicePort": 6312,
-    "webPort": 2070
-}

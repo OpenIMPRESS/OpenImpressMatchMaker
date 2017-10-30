@@ -3,10 +3,10 @@ import ISession from "../models/ISession";
 import IClient from "../models/IClient";
 
 import { Request, Response } from 'express';
+var util = require('util');
 
 export class SessionController {
-    constructor() {
-    }
+    constructor() {}
 
     static async getSessions(req : Request, res : Response, next : any) {
         try {

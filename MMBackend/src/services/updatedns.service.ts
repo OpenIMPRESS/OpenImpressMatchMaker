@@ -2,15 +2,31 @@ var parseString = require('xml2js').parseString;
 var _ = require("underscore");
 var format = require("string-template");
 var request = require('request');
-var config = require('./updateDNS.config.json');
 var util = require('util');
 
 export class UpdateDNSService {
+    config : any;
+
+    constructor(config : any) {
+	this.config = config;
+    }
+
+    UpdateDNS() {
+        var self = this;
+        console.log("# Updating DNS... ");
+        self.CheckRecord(function(err, ip, recordId) {
+            if (err) console.log(err);
+            else self.UpdateRecord(ip, recordId, function(err) {
+	        if (err) console.log(err);
+	        else console.log("# updated DNS successfully");
+            });
+        });
+    }
     
-    static CheckRecord = (cb) => {
-        var fullHost = config.record+'.'+config.domain;
+    CheckRecord = (cb) => {
+        var fullHost = this.config.record+'.'+this.config.domain;
         var _dnsListRecords = "https://www.namesilo.com/api/dnsListRecords?version=1&type=xml&key={apikey}&domain={domain}";
-        var dnsListRecords = format(_dnsListRecords, config);
+        var dnsListRecords = format(_dnsListRecords, this.config);
         request(dnsListRecords, function(err, response, body) {
             if (err) return cb(err);
             parseString(body, function (err, result) {
@@ -32,13 +48,11 @@ export class UpdateDNSService {
         });
     }
 
-    static UpdateRecord = (ip, recordId, cb) => {
-        config.ip = ip;
-        config.recordId = recordId;
+    UpdateRecord = (ip, recordId, cb) => {
+        this.config.ip = ip;
+        this.config.recordId = recordId;
         var _dnsUpdateRecord = "https://www.namesilo.com/api/dnsUpdateRecord?version=1&type=xml&key={apikey}&domain={domain}&rrid={recordId}&rrhost={record}&rrvalue={ip}&rrttl=3600";
-        var dnsUpdateRecord = format(_dnsUpdateRecord, config);
-        return;
-        /*
+        var dnsUpdateRecord = format(_dnsUpdateRecord, this.config);
         request(dnsUpdateRecord, function(err, response, body) {
             if (err) return cb(err);
             parseString(body, function (err, result) {
@@ -49,7 +63,7 @@ export class UpdateDNSService {
                     cb(result.namesilo.reply[0]);
                 }
             });
-        });*/
+        });
     }
 
 }

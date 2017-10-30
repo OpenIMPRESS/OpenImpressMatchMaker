@@ -1,11 +1,12 @@
 import mongoose = require('mongoose');
 import IClient from "./IClient";
-import { Socket, SocketSchema } from './socket.model';
+//import { Socket, SocketSchema } from './socket.model';
+//import { Session, SessionSchema } from './session.model';
 
 interface IClientModel extends IClient, mongoose.Document {
 }
 
-let ClientSchema = new mongoose.Schema({
+const ClientSchema = new mongoose.Schema({
     guid: { type : String , unique : true, required : true, dropDups: true },
     name: String,
     type: String,

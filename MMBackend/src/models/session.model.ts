@@ -1,11 +1,11 @@
 import mongoose = require('mongoose');
 import ISession from "./ISession";
-import { Client, ClientSchema } from './client.model';
+//import { Client, ClientSchema } from './client.model';
 
 export interface ISessionModel extends ISession, mongoose.Document {
 }
 
-let SessionSchema = new mongoose.Schema({
+const SessionSchema = new mongoose.Schema({
     name: { type : String , unique : true, required : true, dropDups: true },
     description: String
     //clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Client' }] //[ ClientSchema ]
@@ -20,4 +20,4 @@ SessionSchema.virtual('clients', {
 
 const Session = mongoose.model<ISessionModel>("Session", SessionSchema);
 
-export { Session, SessionSchema, ISession};
+export { Session, SessionSchema, ISession };

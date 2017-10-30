@@ -1,7 +1,6 @@
+import { ClientController } from '../../controllers/client.controller';
 import express = require('express');
 var router = express.Router();
-
-import { ClientController } from '../../controllers/client.controller';
 
 router.get('/', ClientController.getClients);
 router.post('/', ClientController.createClient);

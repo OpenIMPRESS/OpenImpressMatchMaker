@@ -1,7 +1,11 @@
-import { Client, IClient } from '../models/client.model';
-import { Session, ISession } from '../models/session.model';
 import mongoose = require('mongoose');
 import util = require('util');
+
+import { Session, ISession } from '../models/session.model';
+import { Socket, ISocket } from '../models/socket.model';
+import { Connection, IConnection } from '../models/connection.model';
+import { Client, IClient } from '../models/client.model';
+
 
 export class MMAPIService {
     constructor() {}
@@ -97,7 +101,6 @@ export class MMAPIService {
     }
 
     static async updateClient(guid : string, client : IClient) {
-        console.log("UPDATE CLIENT 1");
         try {
             var oldClient = await Client.findOne({ guid: guid });
         } catch(e) {
@@ -107,7 +110,6 @@ export class MMAPIService {
         if (!oldClient){
             return false;
         }
-        console.log(util.inspect(oldClient));
 
         if (client.type !== null) oldClient.type = client.type;
         if (client.name !== null) oldClient.name = client.name;
@@ -115,7 +117,6 @@ export class MMAPIService {
             try {
                 var sessionID = mongoose.Types.ObjectId(client.session);
                 var session = await Session.findById(sessionID);
-                console.log(util.inspect(session));
                 oldClient.session = session;
             } catch(e) {
                 throw Error("Couldn't assign: "+e);
@@ -124,7 +125,6 @@ export class MMAPIService {
             oldClient.session = null;
         }
     
-        console.log(util.inspect(oldClient));
         try {
             var updatedClient = await oldClient.save()
             return updatedClient; 

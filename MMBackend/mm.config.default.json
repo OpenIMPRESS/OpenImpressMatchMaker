@@ -1,0 +1,12 @@
+{
+    "mongoUrl": "mongodb://127.0.0.1:27017/mm?authSource=mm",
+    "user": "user",
+    "pass": "pass",
+    "mmServicePort": 6312,
+    "webPort": 2070,
+    "dns": {
+        "apikey": "APIKEY",
+        "domain": "mydomain.com",
+        "record": "mm"
+    }
+}

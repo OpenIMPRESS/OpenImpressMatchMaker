@@ -1,13 +1,8 @@
 #!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
-var app = require('../app');
+var app = require('./dist/server');
+var config = require('./mm.config.json');
 var debug = require('debug')('mmbackend:server');
 var http = require('http');
-var config = require('../mm.config.json');
 
 /**
  * Get port from environment and store in Express.

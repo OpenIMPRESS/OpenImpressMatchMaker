@@ -1,7 +1,6 @@
 import { Session, ISession } from '../models/session.model';
 import { Socket, ISocket } from '../models/socket.model';
 import { Connection, IConnection } from '../models/connection.model';
-import { UpdateDNSService } from '../updatedns/updatedns.service';
 import { Client, IClient } from '../models/client.model';
 import { MMAPIService } from './mmapi.service';
 
@@ -13,14 +12,12 @@ var hash = require('object-hash');
 export class MMService {
     udp_port : number;
     updateHistory : any;
-    udpater: any;
     udp_socket : any;
 
     constructor(port : number) {
         var self = this;
         this.udp_port = port;
         this.updateHistory = {};
-        this.udpater = setInterval(function(){ self.UpdateDNS(); }, 30*60*1000);
         this.Connect();
     }
 
@@ -97,7 +94,15 @@ export class MMService {
         let socket = await Socket.findOneAndUpdate({ client: _socket.client, identifier: _socket.identifier },
             { $set: _socket }, { upsert: true, new: true });
 
-        let session = await MMAPIService.getSession(client.session);
+        if (client.session == null) {
+            return console.log("Not part of session...");
+        }
+
+        try {
+            let session = await MMAPIService.getSession(client.session);
+        } catch (e) {
+            throw Error("Failed to get session: "+e);
+        }
         var connectedEndpoints : IConnection[] = self.GetConnectedEndpoints(socket, session);
         for (var soIdx in connectedEndpoints) {
             self.SendAnswer(socket.connection, connectedEndpoints[soIdx]);
@@ -156,18 +161,6 @@ export class MMService {
         self.udp_socket.on('listening', self.Listening.bind(self));
         self.udp_socket.on('message', self.HandleMessage.bind(self));
         self.udp_socket.bind(self.udp_port);
-    }
-    
-    UpdateDNS() {
-        var self = this;
-        console.log("# Updating DNS... ");
-        UpdateDNSService.CheckRecord(function(err, ip, recordId) {
-            if (err) console.log(err);
-            else UpdateDNSService.UpdateRecord(ip, recordId, function(err) {
-                if (err) console.log(err);
-                else console.log("# updated DNS successfully");
-            });
-        });
     }
 
 }

@@ -1,7 +1,6 @@
+import { SessionController } from '../../controllers/session.controller';
 import express = require('express');
 var router = express.Router();
-
-import { SessionController } from '../../controllers/session.controller';
 
 router.get('/', SessionController.getSessions);
 router.post('/', SessionController.createSession);
