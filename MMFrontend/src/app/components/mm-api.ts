@@ -1,7 +1,7 @@
-import ISession from '../../../../MMBackend/models/ISession';
-import IClient from '../../../../MMBackend/models/IClient';
-import ISocket from '../../../../MMBackend/models/ISocket';
-import IConnection from '../../../../MMBackend/models/IConnection';
+import ISession from    '../../../../MMBackend/src/models/ISession';
+import IClient from     '../../../../MMBackend/src/models/IClient';
+import ISocket from     '../../../../MMBackend/src/models/ISocket';
+import IConnection from '../../../../MMBackend/src/models/IConnection';
 
 class MMApi {
     apiUrl : string = '';
