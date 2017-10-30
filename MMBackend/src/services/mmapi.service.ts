@@ -155,7 +155,6 @@ export class MMAPIService {
             var removeClient = await Client.findOne({ guid: guid });
             var resRemoveSocket = await Socket.remove({ client: removeClient._id });
             var resRemoveClient = await removeClient.remove();
-            console.log(util.inspect(resRemoveSocket));
             return;
         } catch(e) {
             throw Error("Error Occured while Deleting the Client: "+e);
