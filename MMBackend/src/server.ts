@@ -10,6 +10,17 @@ import { Session } from './models/session.model';
 import { Socket } from './models/socket.model';
 import { Connection } from './models/connection.model';
 
+// ===  THIS PART FORCES ALL MODELS TO BE INITIALIZED ===================
+var len = Client.length+Session.length+Socket.length+Connection.length;
+console.log("Checking Models... "+len)
+mongoose.model('Client');
+mongoose.model('Session');
+mongoose.model('Socket');
+mongoose.model('Connection');
+// =======================================================================
+
+var api = require('./routes/api.route');
+
 import express = require('express');
 import favicon = require('serve-favicon');
 import logger = require('morgan');
@@ -27,7 +38,6 @@ app.use(cors());
 app.use('/', express.static('../MMFrontend/dist'));
 
 // Host HTTP REST API Service
-var api = require('./routes/api.route');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', api);
@@ -53,4 +63,3 @@ mongoose.connection.on('disconnected', function () {
 mongoose.connect(config.mongoUrl, { useMongoClient: true, user: config.user, pass: config.pass });
 
 module.exports = app;
-

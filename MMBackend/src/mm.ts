@@ -10,6 +10,15 @@ import { Session } from './models/session.model';
 import { Socket } from './models/socket.model';
 import { Connection } from './models/connection.model';
 
+// ===  THIS PART FORCES ALL MODELS TO BE INITIALIZED ===================
+var len = Client.length+Session.length+Socket.length+Connection.length;
+console.log("Checking Models... "+len)
+mongoose.model('Client');
+mongoose.model('Session');
+mongoose.model('Socket');
+mongoose.model('Connection');
+// =======================================================================
+
 import { MMService } from './services/mm.service';
 import { UpdateDNSService } from './services/updatedns.service';
 
