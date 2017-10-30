@@ -4,7 +4,7 @@ import ISocket from     '../../../../MMBackend/src/models/ISocket';
 import IConnection from '../../../../MMBackend/src/models/IConnection';
 
 class MMApi {
-    apiUrl : string = 'http://localhost:2070';
+    apiUrl : string = '';
     resourceUrl : string;
     constructor(resource : string) { 
         this.resourceUrl = `${this.apiUrl}/api/${resource}`;
