@@ -49,16 +49,11 @@ export class SessionListComponent implements OnInit {
         this.refresh();
       })
   }
-
-  remove(session: Session): void {
-    console.log("TODO: remove session");
-  }
   
   createClient(): void {
-    console.log("CREATE");
     this.clientService.createClient(this.newClient)
       .subscribe((res) => {
-        this.newSession = new Session();
+        this.newClient = new Client();
         this.refresh();
       })
   }

@@ -43,10 +43,12 @@ export class ClientComponent extends Editable {
   }
 
   delete() {
-    this.clientService.deleteClient(this.model).subscribe(res => {
-        console.log("I SHOULD REMOVE MYSELF");
-      // ...
-    })
+    this.clientService.deleteClient(this.model.guid).subscribe(err => {
+      if (err != null) {
+        console.log(err);
+      }
+      this.mainComponent.refresh();
+    });
   }
 
 

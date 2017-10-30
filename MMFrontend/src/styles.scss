@@ -32,6 +32,10 @@ input[name=t] {
     width:100%;
 }
 
+.full-height {
+    height: 100%;
+}
+
 div.md-card-full {
     width: calc(100%);
     margin: 0 -24px;
@@ -83,6 +87,11 @@ h2.title {
     font-size: 12px;
 }
 
+.button-float {
+    float: right;
+    margin-left: 5px;
+}
+
 .client-guid {
     font-size: 10px;
     font-family: monospace;
@@ -95,7 +104,7 @@ h2.title {
 }
 
 .clearleft {
-    clear: left;
+    clear: both;
 }
 
 h4.client-name {
@@ -107,4 +116,8 @@ h5.client-type {
 
 td > button.btn {
     margin-top:5px;
+}
+
+.session-header {
+    height: 105px;
 }

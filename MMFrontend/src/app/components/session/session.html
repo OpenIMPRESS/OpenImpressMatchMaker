@@ -1,12 +1,28 @@
-<div [ngClass]="{'bg-dark': model.isUnassigned } " class="bg-primary text-light card-header" role="tab" id="heading{{model._id}}">
-    <h5 class="mb-0">
-        <a *ngIf="!editing">
-            <span (dblclick)="!model.isUnassigned && edit();">{{model.name}}</span>
-        </a>
-        <input *ngIf="editing" name="name" (keyup)="submit($event)" [(ngModel)]="model.name" placeholder="Session Name" class="edit-session-name form-control">
-    </h5>
-    <span  *ngIf="!editing" (dblclick)="!model.isUnassigned && edit();">{{model.description}}</span>
-    <input *ngIf="editing" name="description" (keyup)="submit($event)" [(ngModel)]="model.description" placeholder="..." class="edit-session-desc form-control">
+<div [ngClass]="{'bg-dark': model.isUnassigned } " class="bg-primary text-light card-header session-header" role="tab" id="heading{{model._id}}">
+    <table class="full-width full-height">
+        <tr>
+            <td>
+                <h5 class="mb-0">
+                    <a *ngIf="!editing">
+                        <span (dblclick)="!model.isUnassigned && edit();">{{model.name}}</span>
+                    </a>
+                    <input *ngIf="editing" name="name" (keyup)="submit($event)" [(ngModel)]="model.name" placeholder="Session Name" class="edit-session-name form-control text-light">
+                </h5>
+            </td>
+            <td rowspan="2" class="o nobreak text-right">
+                <ng-container *ngIf="!model.isUnassigned">
+                    <button class="btn btn-danger bg-light" (click)="!model.isUnassigned && delete();"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-primary bg-light" (click)="!model.isUnassigned && edit();"><i class="fa fa-pencil"></i></button>
+                </ng-container>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span  *ngIf="!editing" (dblclick)="!model.isUnassigned && edit();">{{model.description}}</span>
+                <input *ngIf="editing" name="description" (keyup)="submit($event)" [(ngModel)]="model.description" placeholder="Description" class="edit-session-desc form-control text-light">
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div id="collapse{{model._id}}" role="tabpanel" data-parent="#accordion">

@@ -36,11 +36,12 @@ export class SessionComponent extends Editable {
   }
 
   delete() {
-    this.sessionService.deleteSession(this.model._id).subscribe(res => {
-        console.log("I SHOULD REMOVE MYSELF");
-      // ...
-    })
+    this.sessionService.deleteSession(this.model._id).subscribe(err => {
+      if (err != null) {
+        console.log(err);
+      }
+      this.mainComponent.refresh();
+    });
   }
-
 
 }

@@ -73,10 +73,10 @@ export class MMAPIService {
     }
 
     static async removeSession(id : any) {
-        // TODO: check if it is not default/unassigned session...
-        // TODO: move clients to default/unassigned session
         try {
-            return await Session.remove({_id: id});
+            var resUpdateClients = await Client.update({ session: id }, { session: null },  { multi: true });
+            var resRemoveSession = await Session.remove({_id: id});
+            return;
         } catch(e) {
             throw Error("Error Occured while Deleting the Session: "+e);
         }
@@ -150,9 +150,13 @@ export class MMAPIService {
         }
     }
 
-    static async removeClient(id : any) {
+    static async removeClient(guid : any) {
         try {
-            return await Client.remove({_id: id});
+            var removeClient = await Client.findOne({ guid: guid });
+            var resRemoveSocket = await Socket.remove({ client: removeClient._id });
+            var resRemoveClient = await removeClient.remove();
+            console.log(util.inspect(resRemoveSocket));
+            return;
         } catch(e) {
             throw Error("Error Occured while Deleting the Client: "+e);
         }

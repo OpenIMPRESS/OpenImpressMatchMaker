@@ -34,9 +34,8 @@ export class SessionService extends MMApi {
 
   deleteSession(id : string) : any {
     let deleteUrl = `${this.resourceUrl}/${id}`
-    return this.http.delete(deleteUrl)
-    .map(res  => {
-      return res;
+    return this.http.delete(deleteUrl).map(res  => {
+      return res; // null if no error
     });
   }
 

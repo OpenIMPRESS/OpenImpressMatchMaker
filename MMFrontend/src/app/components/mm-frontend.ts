@@ -6,7 +6,7 @@ abstract class Editable {
     abstract reset() : void;
 
     edit() : void {
-        this.editing = true;
+        this.editing = !this.editing;
     }
     
     submit(event) : void {

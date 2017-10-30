@@ -48,10 +48,10 @@ export class ClientService extends MMApi {
   }
 
   // Remove client from db
-  deleteClient(client : Client) : Observable<any> {
-    let deleteUrl = `${this.resourceUrl}/${client.guid}`
+  deleteClient(guid : any) : Observable<any> {
+    let deleteUrl = `${this.resourceUrl}/${guid}`
     return this.http.delete(deleteUrl).map(res  => {
-      return res;
+      return res; // null if no error
     });
   }
   

@@ -65,10 +65,10 @@ export class SessionController {
             return res.status(400).json({status: 400., message: "ERR: Session id to be removed must be present in params."});
         }
     
-        var id = req.params.guid;
+        var id = req.params.id;
         try {
             var removed = await MMAPIService.removeSession(id);
-            return res.status(204).json({status: 204, message: "OK"});
+            return res.status(204).json({status: 204, message: "OK" });
         } catch (e) {
             return res.status(400).json({status: 400, message: "ERR: Failed to remove Session,"+e.message});
         }
