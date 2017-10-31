@@ -149,7 +149,7 @@ export class MMService {
 
         // Prepare answer packet.
         var address = c_match.publicIP;
-        if (c_to.publicIP == c_match.publicIP) address = c_match.localIP;
+        if (c_to.publicIP == c_match.publicIP && c_match.localIP != "noLocalIP") address = c_match.localIP;
         var answerObj = { type: 'answer', address: address, port: c_match.port };
         var data = new Buffer(String.fromCharCode(100)+JSON.stringify(answerObj));
 
