@@ -91,7 +91,7 @@ export class MMService {
         }
 
         // Add/update socket 
-        let socket = await Socket.findOneAndUpdate({ client: _socket.client, identifier: _socket.identifier },
+        let socket = await Socket.findOneAndUpdate({ client: _socket.client, identifier: _socket.identifier, role: _socket.role },
             { $set: _socket }, { upsert: true, new: true });
 
         if (client.session == null) {
@@ -106,14 +106,14 @@ export class MMService {
             throw Error("Failed to get session: "+e);
         }
 
-        var connectedEndpoints : IConnection[] = self.GetConnectedEndpoints(socket, session);
+        var connectedEndpoints : IConnection[] = self.GetConnectedEndpoints(client, socket, session);
         for (var soIdx in connectedEndpoints) {
             self.SendAnswer(socket.connection, connectedEndpoints[soIdx]);
             self.SendAnswer(connectedEndpoints[soIdx], socket.connection);
         }
     }
     
-    GetConnectedEndpoints(socket: ISocket, session: ISession) {
+    GetConnectedEndpoints(client : IClient, socket: ISocket, session: ISession) {
         var self = this;
         var otherEndpoint = (socket.role == "receiver") ? "sender" : "receiver";
         
@@ -122,9 +122,11 @@ export class MMService {
         for (var cIdx in session.clients) {
             //console.log("\t\tSockets in client: "+session.clients[cIdx].sockets.length);
             for (var sIdx in session.clients[cIdx].sockets) {
-                var otherSocket = session.clients[cIdx].sockets[sIdx];
+                var otherClient = session.clients[cIdx];
+                var otherSocket = otherClient.sockets[sIdx];
                 if (otherSocket.identifier != socket.identifier ||
-                    otherSocket.role != otherEndpoint) continue;
+                    otherSocket.role != otherEndpoint ||
+                    client.guid == otherClient.guid) continue;
                 res.push(otherSocket.connection);
             }
         }
