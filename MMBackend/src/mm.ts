@@ -20,11 +20,11 @@ mongoose.model('Connection');
 // =======================================================================
 
 import { MMService } from './services/mm.service';
-import { UpdateDNSService } from './services/updatedns.service';
+import { UpdateDNSService } from './services/updatedns_google.service';
 
 // Start match making service & dns service
 var mm = new MMService(config.mmServicePort);
-var dns = new UpdateDNSService(config.dns);
+var dns = new UpdateDNSService(config.dns_google);
 
 var udpater = setInterval(function(){ dns.UpdateDNS(); }, 30*60*1000);
 dns.UpdateDNS();

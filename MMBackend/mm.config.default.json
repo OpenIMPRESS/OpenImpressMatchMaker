@@ -4,9 +4,14 @@
     "pass": "pass",
     "mmServicePort": 6312,
     "webPort": 2070,
-    "dns": {
-        "apikey": "APIKEY",
-        "domain": "mydomain.com",
-        "record": "mm"
+    "dns_google": {
+        "username": "",
+        "password": "",
+        "hostname": ""
+    },
+    "dns_namesilo": {
+        "apikey": "",
+        "domain": "",
+        "record": ""
     }
 }
