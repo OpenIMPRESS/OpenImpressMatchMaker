@@ -1,5 +1,5 @@
 {
-    "mongoUrl": "mongodb://127.0.0.1:27017/mm?authSource=mm",
+    "mongoUrl": "mongodb://127.0.0.1:27017/mm",
     "user": "user",
     "pass": "pass",
     "mmServicePort": 6312,
